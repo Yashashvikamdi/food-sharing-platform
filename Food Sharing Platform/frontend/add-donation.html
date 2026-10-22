@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Donation | FoodShare</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body class="dashboard-body">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">f</span>
+        <span>Food<span class="brand-light">Share</span></span>
+      </a>
+
+      <div class="sidebar-label">WORKSPACE</div>
+      <a class="side-link" href="donor-dashboard.html">▦ <span>Overview</span></a>
+      <a class="side-link active" href="add-donation.html">＋ <span>Add donation</span></a>
+      <a class="side-link" href="donor-dashboard.html#donations">▤ <span>My donations</span></a>
+      <a class="side-link" href="impact.html">↗ <span>My impact</span></a>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-user">
+          <span class="user-avatar">D</span>
+          <div>
+            <strong id="sideUserName">Demo Donor</strong>
+            <small>Donor account</small>
+          </div>
+        </div>
+        <button class="side-link side-button" onclick="logout()">↪ <span>Log out</span></button>
+      </div>
+    </aside>
+
+    <main class="dashboard-main">
+      <header class="dash-topbar">
+        <button class="menu-toggle dash-menu" onclick="toggleSidebar()">☰</button>
+        <div>
+          <span class="eyebrow">DONOR WORKSPACE</span>
+          <h1>Create a donation</h1>
+        </div>
+        <div class="topbar-actions">
+          <span class="demo-pill">LIVE DATABASE</span>
+        </div>
+      </header>
+
+      <div class="dash-content narrow-content">
+        <div class="page-intro">
+          <h2>Share surplus food</h2>
+          <p>Give NGOs the details they need to decide whether they can collect your listing.</p>
+        </div>
+
+        <form class="form-card donation-form" id="donationForm" onsubmit="return submitDonation(event)">
+
+          <div class="form-section-title">
+            <span>01</span>
+            <div>
+              <h3>Food details</h3>
+              <p>Describe what is available to share.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              Food name *
+              <input id="foodName" type="text" required placeholder="e.g. Vegetable pulao">
+            </label>
+
+            <label>
+              Food category *
+              <select id="foodCategory" required>
+                <option value="">Select category</option>
+                <option>Cooked meals</option>
+                <option>Bakery</option>
+                <option>Fresh produce</option>
+                <option>Packaged food</option>
+                <option>Dairy</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <label>
+              Quantity (kg) *
+              <input
+                id="foodQuantity"
+                type="number"
+                min="0.1"
+                step="0.1"
+                placeholder="e.g. 5"
+                required
+              >
+            </label>
+
+            <label>
+              Source type *
+              <select id="foodSource" required>
+                <option>Home / family</option>
+                <option>Restaurant / hotel</option>
+                <option>Event / function</option>
+                <option>Canteen / community kitchen</option>
+                <option>Grocery / bakery</option>
+              </select>
+            </label>
+
+            <label>
+              Preparation date &amp; time *
+              <input id="preparedAt" type="datetime-local" required>
+            </label>
+
+            <label>
+              Pickup deadline *
+              <input id="pickupDeadline" type="datetime-local" required>
+            </label>
+
+            <label class="full-field">
+              Storage conditions *
+              <select id="storageCondition" required>
+                <option value="">Select storage condition</option>
+                <option>Kept hot / temperature-controlled</option>
+                <option>Refrigerated</option>
+                <option>Room temperature</option>
+                <option>Sealed / packaged</option>
+                <option>Other — explain in notes</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="form-section-title form-section-spaced">
+            <span>02</span>
+            <div>
+              <h3>Pickup details</h3>
+              <p>Provide an approximate location for coordination.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              City *
+              <select id="foodCity" required>
+                <option>Nagpur</option>
+                <option>Indore</option>
+              </select>
+            </label>
+
+            <label>
+              Area / neighbourhood *
+              <input id="foodArea" type="text" required placeholder="e.g. Dhantoli">
+            </label>
+
+            <div class="full-field location-tools">
+              <label>Find pickup location on map</label>
+              <p class="field-help">
+                Choose a point on the map or use your browser location.
+                You can still enter the area and address manually.
+              </p>
+
+              <div class="location-actions">
+                <button class="btn btn-outline btn-small" type="button" onclick="useCurrentLocation()">
+                  ◎ Use my current location
+                </button>
+                <button class="btn btn-outline btn-small" type="button" onclick="resetDemoMap()">
+                  Reset map
+                </button>
+              </div>
+
+              <div id="pickupMap" class="pickup-map" role="application" aria-label="Pickup location map"></div>
+
+              <p class="map-status" id="mapStatus">
+                Map location not selected. Manual address is available.
+              </p>
+
+              <input type="hidden" id="pickupLat">
+              <input type="hidden" id="pickupLng">
+            </div>
+
+            <label class="full-field">
+              Pickup address / instructions *
+              <textarea id="foodAddress" required rows="3" placeholder="Landmark, entrance details, contact instructions..."></textarea>
+            </label>
+
+            <label class="full-field">
+              Additional notes (optional)
+              <textarea id="foodNotes" rows="2" placeholder="Allergens, packaging, serving instructions, etc."></textarea>
+            </label>
+          </div>
+
+          <label class="safety-check">
+            <input type="checkbox" id="foodSafety" required>
+            <span>I have provided accurate details and will not knowingly list food that is unsafe to share.</span>
+          </label>
+
+          <div class="form-actions">
+            <a class="btn btn-outline" href="donor-dashboard.html">Cancel</a>
+            <button class="btn btn-primary" type="submit">Preview &amp; save donation ↗</button>
+          </div>
+
+          <p class="prototype-note">
+            Submit a donation to save its details. NGO collection is not confirmed until an NGO accepts it.
+          </p>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

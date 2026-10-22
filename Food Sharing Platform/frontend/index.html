@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Sharing Platform | Share More, Waste Less</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="index.html"><span class="brand-mark">f</span><span>Food<span class="brand-light">Share</span></span></a>
+  <button class="menu-toggle" aria-label="Toggle navigation" onclick="toggleNav()">☰</button>
+  <nav class="nav-links" id="navLinks"><a href="#how">How it works</a><a href="#listings">Available food</a><a href="#impact">Our impact</a><a href="login.html" class="nav-login">Log in</a><a href="register.html" class="btn btn-primary btn-small">Join the community</a></nav>
+</header>
+<main>
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow"><span class="dot"></span> GOOD FOOD. BETTER PURPOSE.</span>
+    <h1>Food is too good<br>to <span class="text-green">go to waste.</span></h1>
+    <p class="hero-sub">Connect surplus food with local NGOs and communities that can put it to good use. A small share can make a meaningful difference.</p>
+    <div class="hero-actions"><a class="btn btn-primary" href="register.html">Share surplus food <span>↗</span></a><a class="btn btn-outline" href="#how">See how it works</a></div>
+    <div class="hero-proof"><div class="avatar-stack"><span>🥗</span><span>🍲</span><span>🤝</span></div><div><strong>One community, many good deeds</strong><small>Every listing is a chance to help.</small></div></div>
+  </div>
+  <div class="hero-visual">
+    <img class="hero-photo" src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1400&q=90" alt="Fresh, colourful food prepared for sharing">
+    <div class="floating-card float-top"><span class="float-icon">♻</span><div><strong>Less waste</strong><small>More food shared</small></div></div>
+    <div class="floating-card float-bottom"><span class="float-icon orange">♡</span><div><strong>Good food, shared locally</strong><small>Donors + NGOs working together</small></div></div>
+    <div class="hero-sticker">Share<br><b>goodness.</b></div>
+  </div>
+</section>
+<section class="trust-strip"><div><strong>01</strong><span>List surplus food</span></div><div><strong>02</strong><span>Connect with an NGO</span></div><div><strong>03</strong><span>Coordinate a pickup</span></div><div><strong>04</strong><span>Track the impact</span></div></section>
+<section class="section section-soft" id="how">
+  <div class="section-heading"><span class="eyebrow">A SIMPLE WAY TO HELP</span><h2>Good food finds a <span class="text-green">better destination.</span></h2><p>Whether you're sharing from a home, a restaurant, or an event, the process stays simple.</p></div>
+  <div class="steps-grid"><article class="step-card"><span class="step-number">01</span><div class="step-icon">🍱</div><h3>Post a food listing</h3><p>Add the food type, quantity, preparation time, pickup location and deadline.</p></article><article class="step-card"><span class="step-number">02</span><div class="step-icon">📍</div><h3>Find a local NGO</h3><p>NGOs review available listings and choose food that suits their capacity and route.</p></article><article class="step-card"><span class="step-number">03</span><div class="step-icon">🤝</div><h3>Coordinate pickup</h3><p>Confirm a pickup time and update the donation status as it moves forward.</p></article></div>
+</section>
+<section class="section" id="listings">
+  <div class="section-heading row-heading"><div><span class="eyebrow">READY TO BE SHARED</span><h2>Food available nearby</h2><p>Explore sample listings from our demo community.</p></div><a href="login.html" class="text-link">View all listings ↗</a></div>
+  <div class="filter-bar"><label class="search-box">⌕ <input id="listingSearch" type="search" placeholder="Search food or location" oninput="filterHomeListings()"></label><select id="cityFilter" onchange="filterHomeListings()"><option value="">All locations</option><option>Nagpur</option><option>Indore</option></select><select id="categoryFilter" onchange="filterHomeListings()"><option value="">All categories</option><option>Cooked meals</option><option>Bakery</option><option>Fresh produce</option><option>Packaged food</option></select></div>
+  <div class="listing-grid" id="homeListings">
+    <article class="food-card" data-city="Nagpur" data-category="Cooked meals" data-search="fresh veg pulao dhantoli nagpur"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=88" alt="Rice meal"><div class="food-card-body"><div class="card-topline"><span class="tag tag-green">Cooked meals</span><span class="time-left">⏱ Today</span></div><h3>Fresh veg pulao</h3><p class="location">⌖ Dhantoli, Nagpur</p><div class="food-meta"><span>🍱 20 portions</span><span>Pickup by 8:30 PM</span></div><a href="login.html" class="card-link">View donation <span>→</span></a></div></article>
+    <article class="food-card" data-city="Indore" data-category="Bakery" data-search="bakery bread rolls vijay nagar indore"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=88" alt="Fresh bakery bread"><div class="food-card-body"><div class="card-topline"><span class="tag tag-orange">Bakery</span><span class="time-left">⏱ Today</span></div><h3>Bread & bakery rolls</h3><p class="location">⌖ Vijay Nagar, Indore</p><div class="food-meta"><span>🥖 35 items</span><span>Pickup by 7:00 PM</span></div><a href="login.html" class="card-link">View donation <span>→</span></a></div></article>
+    <article class="food-card" data-city="Nagpur" data-category="Fresh produce" data-search="fresh seasonal vegetables sitabuldi nagpur"><img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=900&q=88" alt="Fresh vegetables"><div class="food-card-body"><div class="card-topline"><span class="tag tag-blue">Fresh produce</span><span class="time-left">⏱ Tomorrow</span></div><h3>Seasonal vegetables</h3><p class="location">⌖ Sitabuldi, Nagpur</p><div class="food-meta"><span>🥬 8 kg</span><span>Pickup by 10:00 AM</span></div><a href="login.html" class="card-link">View donation <span>→</span></a></div></article>
+  </div>
+  <div class="center-action"><a href="register.html" class="btn btn-outline">Join to explore more listings</a></div>
+</section>
+<section class="impact-band" id="impact"><div><span class="eyebrow eyebrow-light">SMALL ACTIONS ADD UP</span><h2>Make surplus food<br>count for something.</h2><p>Our platform is designed to make local food sharing easier to coordinate and easier to track.</p><a href="register.html" class="btn btn-light">Be part of it ↗</a></div><div class="impact-stats"><div><span>♧</span><strong>Less food waste</strong><small>Redirect surplus food to people who can use it.</small></div><div><span>◎</span><strong>Local connections</strong><small>Bring donors and NGOs closer together.</small></div><div><span>↗</span><strong>Visible progress</strong><small>Follow donation and pickup statuses.</small></div></div></section>
+<section class="safety-note"><span class="safety-icon">!</span><div><strong>Food safety comes first</strong><p>Donors should provide accurate preparation and storage details. NGOs must assess food condition on collection. The platform does not certify food as safe to eat.</p></div></section>
+</main>
+<footer class="site-footer"><a class="brand" href="index.html"><span class="brand-mark">f</span><span>Food<span class="brand-light">Share</span></span></a><p>Share more. Waste less. Help locally.</p><div><a href="login.html">Log in</a><a href="register.html">Register</a><a href="README.txt">Project notes</a></div><small>© 2026 Food Sharing Platform · Frontend demo</small></footer>
+<div id="toast" class="toast" role="status"></div>
+<script src="script.js"></script>
+</body></html>
